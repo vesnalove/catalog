@@ -8,7 +8,7 @@
     <SubCategorySelector
       :subselected="subselected"
       :suboptions="subcategories"
-      @select="sortSubProducts"
+      @subselect="sortSubProducts"
       v-if="selected != 'All'"
     />
   </div>
@@ -41,9 +41,11 @@ onMounted(() => {
 import CatalogItem from "./CatalogItem.vue";
 import CategorySelector from "./CategorySelector.vue";
 import SubCategorySelector from "./SubCategorySelector.vue";
+import { CategoryFilter } from "../mixins/CategoryFilter";
 
 export default {
   name: "catalog",
+  mixins: [CategoryFilter],
   components: {
     CatalogItem,
     CategorySelector,
@@ -51,62 +53,10 @@ export default {
   },
   props: {},
   data() {
-    return {
-      categories: [
-        { title: "All" },
-        { title: "Phones" },
-        { title: "Computer components" },
-        { title: "Laptops" },
-        { title: "TV" },
-      ],
-      selected: "All",
-      sortedProducts: [],
-      subcategories: [
-        { title: "All" },
-        { title: "Apple", main: "Phones" },
-        { title: "Xiaomi", main: "Phones" },
-        { title: "Samsung", main: "Phones" },
-      ],
-      subselected: "Select subcategory",
-      sortedSubProducts: [],
-    };
+    return {};
   },
-  computed: {
-    filteredProducts() {
-      if (this.sortedProducts.length) {
-        if (this.sortedSubProducts.length) {
-          return this.sortedSubProducts;
-        } else {
-          return this.sortedProducts;
-        }
-      } else {
-        return this.getProducts;
-      }
-    },
-  },
-  methods: {
-    sortProducts(category) {
-      this.sortedProducts = [];
-      let vm = this;
-      this.getProducts.map(function (item) {
-        if (item.category.title === category.title) {
-          vm.sortedProducts.push(item);
-        }
-      });
-      this.selected = category.title;
-    },
-    // Fix subcategories filter
-    // sortSubProducts(subcategory) {
-    //   this.sortedSubProducts = [];
-    //   let vr = this;
-    //   this.getProducts.map(function (item) {
-    //     if (item.category.subcategory === subcategory.title) {
-    //       vr.sortedSubProducts.push(item);
-    //     }
-    //   });
-    //   this.subselected = subcategory.title;
-    // },
-  },
+  computed: {},
+  methods: {},
 };
 </script>
 

@@ -11,7 +11,7 @@
       <p class="catalog-item-desc__name">{{ productData.name }}</p>
       <p class="catalog-item-desc__price">Price: {{ productData.price }}$</p>
       <p class="catalog-item-desc__category">
-        {{ productData.category.title }}, {{ productData.category.subcategory }}
+        {{ productData.category }}, {{ productData.subcategory }}
       </p>
     </div>
     <div class="catalog-item-action">
